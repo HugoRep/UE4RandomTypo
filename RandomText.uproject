@@ -14,6 +14,12 @@
 				"UMG",
 				"CoreUObject"
 			]
+		},
+		{
+			"Name": "RandomTypo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
+	
 	]
 }

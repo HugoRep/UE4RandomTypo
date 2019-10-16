@@ -26,8 +26,7 @@ public:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
-	void RandomTypeStart(UObject* textObj, FString text, float Speed);
+	
 
 	UFUNCTION(BlueprintCallable)
 	void OnTextCommit(const FText& Text, ETextCommit::Type CommitMethod);
@@ -35,38 +34,11 @@ public:
 	UFUNCTION()
 	void AddMessage(const FText& Text);
 
-	
-	
-	FTimerDelegate TimerDel;
+	//FTimerDelegate TimerDel;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class APlayerController* MyController;
 
-private:
-	FTimerHandle ObjectCheckTimer;
 
-	int CurrentCount;
 
-	int CurrentTypoCount;
-
-	//TCHAR* CharText;
-	
-	//FString Text = "TEST RandomTypo .......";
-
-	int TextLen;
-
-	float Speed;
-
-	FString AppendRandomText = "";
-
-	FString ReturnValue = "";
-
-	FString GetRandom();
-
-	FString CharAt(FString Str, int n, FString chageString);
-
-	UFUNCTION()
-	void TimerEvent(UObject* TextObject, FString Text);
-
-	float randRange(int min, int max);
 };
