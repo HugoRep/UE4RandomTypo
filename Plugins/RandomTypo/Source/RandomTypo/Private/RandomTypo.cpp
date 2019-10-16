@@ -16,10 +16,6 @@ void FRandomTypoModule::ShutdownModule()
 	// we call this function before unloading the module.
 }
 
-void FRandomTypoModule::RandomTypoPluginStart()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Random Typosss"));
-}
 
 
 #undef LOCTEXT_NAMESPACE

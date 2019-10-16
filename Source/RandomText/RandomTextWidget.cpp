@@ -92,8 +92,9 @@ void URandomTextWidget::AddMessage(const FText& Text)
 			UObject* textObj = Cast<UObject>(NewBlock);
 			
 
-			RandomTypoEffect* obj = NewObject<RandomTypoEffect>();
+			ARandomTypoEffect* obj = NewObject<ARandomTypoEffect>();
 			obj->RandomTypeStart(textObj, *Text.ToString(), 0.03f);
+			//obj->TimerDelegate = 
 			//RandomTypoEffect::RandomTypeStart(textObj, *Text.ToString(), 0.03f);			
 		}
 	}

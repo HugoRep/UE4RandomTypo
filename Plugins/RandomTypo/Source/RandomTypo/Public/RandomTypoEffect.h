@@ -7,11 +7,11 @@
 /**
  * 
  */
-class RANDOMTYPO_API RandomTypoEffect : public AActor
+class RANDOMTYPO_API ARandomTypoEffect : public AActor
 {
 public:
-	RandomTypoEffect();
-	~RandomTypoEffect();
+	ARandomTypoEffect();
+	~ARandomTypoEffect();
 
 public:
 	void RandomTypeStart(UObject* textObj, FString text, float Speed = 0.03f);
@@ -22,7 +22,9 @@ private:
 
 	FString CharAt(FString str, int n, FString ChangeStr);
 
-	void TimerEvent(UObject * TextObject, FString Text);
+	UFUNCTION()
+	void TimerEvent();
+	//void TimerEvent(UObject * TextObject, FString Text);
 
 	float randRange(int min, int max);
 
@@ -42,8 +44,4 @@ private:
 	int TextLength;
 
 	FString AppendRandomTypo = "";
-
-
-
-
 };
