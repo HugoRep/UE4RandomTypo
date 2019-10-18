@@ -2,7 +2,6 @@
 
 
 #include "RandomTypoEffect.h"
-#include "TimerManager.h"
 #include "UObject.h"
 #include "TextBlock.h"
 #include "Kismet/GameplayStatics.h"
@@ -10,33 +9,39 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-
+// Sets default values
 ARandomTypoEffect::ARandomTypoEffect()
 {
-	UE_LOG(LogTemp, Warning, TEXT("teste"));
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = false;
 }
 
-ARandomTypoEffect::~ARandomTypoEffect()
-{
+// Called when the game starts or when spawned
 
+void ARandomTypoEffect::BeginPlay()
+{
+	Super::BeginPlay();
+	
 }
 
-void ARandomTypoEffect::RandomTypeStart(UObject* TextObj, FString Text, float Speed)
+// Called every frame
+void ARandomTypoEffect::Tick(float DeltaTime)
 {
-	UE_LOG(LogTemp, Warning, TEXT("----------------------------RandomTypeStart----------------------------"));
-	Speed = 0.08f;
+	Super::Tick(DeltaTime);
+}
+
+
+void ARandomTypoEffect::RandomTypeStart(FString Text, float SpeedValue)
+{
+	UE_LOG(LogTemp, Warning, TEXT("---------------------------- Random Type Start ----------------------------"));
+
+	Speed = SpeedValue;
 	RandomTypoCount = 0;
 	CompleteTypoCount = 0;
-
+	RandomTypoStr = Text;
 	TextLength = Text.Len();
-
-	//TimerDelegate.BindUFunction(this, FName("TimerEvent"), TextObj, Text);
-	//GetWorld()->GetTimerManager().SetTimer(TimerHandler, TimerDelegate, Speed, true);
-
-	/*UKismetSystemLibrary::K2_SetTimerDelegate(FTimerDynamicDelegate::BindUFunction(this, &ARandomTypoEffect::TimerEvent), Speed, true);*/
-		//GetWorld()->GetTimerManager().SetTimer(TimerHandler,
-	//	this, BindLambda( FTimerDelegate::CreateLambda( []() {
-	//})), Speed, true);
+	
+	GetWorld()->GetTimerManager().SetTimer(TimerHandler, this, &ARandomTypoEffect::TimerEvent, Speed, true);
 }
 
 FString ARandomTypoEffect::GetRandom()
@@ -53,42 +58,40 @@ FString ARandomTypoEffect::CharAt(FString str, int n, FString ChangeStr)
 	return str;
 }
 
-//void RandomTypoEffect::TimerEvent(UObject* TextObject, FString Text)
 void ARandomTypoEffect::TimerEvent()
 {
-
-	//UE_LOG(LogTemp, Warning, TEXT("TimerEvent"));
-
-	//if (RandomTypoCount >= TextLength)
-	//{
-	//	if (CompleteTypoCount >= TextLength)
-	//	{
-	//		GetWorld()->GetTimerManager().ClearTimer(TimerHandler);
-	//		AppendRandomTypo = "";
-	//	}
-	//	else
-	//	{
-	//		FString rsvStr = "";
-	//		rsvStr.AppendChar(Text.GetCharArray()[CompleteTypoCount]);
-	//		for (int i = CompleteTypoCount; i < TextLength; ++i)
-	//		{
-	//			if (i == CompleteTypoCount)
-	//			{
-	//				AppendRandomTypo = CharAt(AppendRandomTypo, CompleteTypoCount, *rsvStr);
-	//			}
-	//			else
-	//			{
-	//				AppendRandomTypo = CharAt(AppendRandomTypo, i, *GetRandom());
-	//			}
-	//		}
-	//	}
-	//	CompleteTypoCount++;
-	//}
-	//else
-	//{
-	//	AppendRandomTypo.Append(FString("X"));
-	//	RandomTypoCount++;
-	//}
+	if (RandomTypoCount >= TextLength)
+	{
+		if (CompleteTypoCount >= TextLength)
+		{
+			GetWorld()->GetTimerManager().ClearTimer(TimerHandler);
+			RandomTypoCompleted.ExecuteIfBound();
+		}
+		else
+		{
+			FString rsvStr = "";
+			rsvStr.AppendChar(RandomTypoStr.GetCharArray()[CompleteTypoCount]);
+			for (int i = CompleteTypoCount; i < TextLength; ++i)
+			{
+				if (i == CompleteTypoCount)
+				{
+					AppendRandomTypo = CharAt(AppendRandomTypo, CompleteTypoCount, *rsvStr);
+				}
+				else
+				{
+					AppendRandomTypo = CharAt(AppendRandomTypo, i, *GetRandom());
+				}
+			}
+		}
+		CompleteTypoCount++;
+	}
+	else
+	{
+		AppendRandomTypo.Append(FString("X"));
+		RandomTypoCount++;
+	}
+	
+	RandomTypoChaged.ExecuteIfBound( *AppendRandomTypo);
 }
 
 float ARandomTypoEffect::randRange(int min, int max)

@@ -14,6 +14,5 @@ class RANDOMTEXT_API URandomTextBlock : public UTextBlock
 {
 	GENERATED_BODY()
 
-	
-	
+
 };

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+
 #include "RandomTextWidget.generated.h"
 
 /**
@@ -34,11 +35,12 @@ public:
 	UFUNCTION()
 	void AddMessage(const FText& Text);
 
-	//FTimerDelegate TimerDel;
+	void RandomTypoChanged(const FString & Text, UObject* TextObj);
+
+	void RandomTypoCompleted(UObject* TextObj , AActor * obj);
+
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-		class APlayerController* MyController;
-
-
+	class APlayerController* MyController;
 
 };

@@ -10,7 +10,6 @@
 #include "RandomTypo.h"
 #include "Kismet/GameplayStatics.h"
 #include "RandomTypo.h"
-#include <RandomTypo.h>
 #include "RandomTypoEffect.h"
 
 
@@ -19,13 +18,10 @@ void URandomTextWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	//CharText = Text.GetCharArray().GetData();
-	
 	RandomText = Cast<UMultiLineEditableText>(GetWidgetFromName(TEXT("RandomText")));
 	InpuText = Cast<UEditableText>(GetWidgetFromName(TEXT("InpuText")));
 	ScrollBox = Cast<UScrollBox>(GetWidgetFromName(TEXT("ScrollBoxVar")));
 	
-	//RandomText->SetText(FText::FromString(Text));
 	if (InpuText)
 	{
 		InpuText->OnTextCommitted.AddDynamic(this, &URandomTextWidget::OnTextCommit);
@@ -46,14 +42,11 @@ void URandomTextWidget::OnTextCommit(const FText& Text, ETextCommit::Type Commit
 	{
 	case ETextCommit::Type::OnCleared:
 	{
-		UE_LOG(LogTemp, Warning, TEXT("OnCleared "));
 		InpuText->SetUserFocus(PC);
 	}
 	break;
 	case ETextCommit::Type::OnEnter:
 	{
-	
-		UE_LOG(LogTemp, Warning, TEXT("OnEnter"));
 		AddMessage(InpuText->GetText());
 		InpuText->SetText(FText::FromString(TEXT("")));
 	}
@@ -64,38 +57,44 @@ void URandomTextWidget::OnTextCommit(const FText& Text, ETextCommit::Type Commit
 	}
 	break;
 
-	}
-
-	
+	}	
 }
+
 void URandomTextWidget::AddMessage(const FText& Text)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Log message"));
 	if (ScrollBox)
 	{
 		UTextBlock* NewBlock = NewObject<UTextBlock>(ScrollBox);
-		//UTextBlock* NewBlock = ConstructObject<UTextBlock>(UTextBlock::StaticClass());
-		
+		UObject *TextObj = Cast<UObject>(NewBlock);
 		if (NewBlock)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Log message"));
-
 			NewBlock->SetText(Text);
 			NewBlock->Font.Size = 20;
 			NewBlock->SetColorAndOpacity(FSlateColor(FLinearColor::White));
 			NewBlock->SetShadowColorAndOpacity(FLinearColor::Black);
-			//NewBlock.widg
-
 			ScrollBox->AddChild(NewBlock);
 			ScrollBox->ScrollToEnd();
-			
-			UObject* textObj = Cast<UObject>(NewBlock);
-			
+	
+			ARandomTypoEffect *objActor = GetWorld()->SpawnActor<ARandomTypoEffect>();
+			objActor->RandomTypeStart(*Text.ToString(), 0.05f);
 
-			ARandomTypoEffect* obj = NewObject<ARandomTypoEffect>();
-			obj->RandomTypeStart(textObj, *Text.ToString(), 0.03f);
-			//obj->TimerDelegate = 
-			//RandomTypoEffect::RandomTypeStart(textObj, *Text.ToString(), 0.03f);			
+			objActor->RandomTypoChaged.BindUObject(this, &URandomTextWidget::RandomTypoChanged , TextObj);
+
+			AActor* actorObj = Cast<AActor>(objActor);
+			objActor->RandomTypoCompleted.BindUObject(this, &URandomTextWidget::RandomTypoCompleted, TextObj , actorObj);
 		}
 	}
+}
+
+void URandomTextWidget::RandomTypoChanged(const FString& Text , UObject* TextObj)
+{
+	UTextBlock *NewBlock = Cast<UTextBlock>(TextObj);
+	NewBlock->SetText(FText::FromString(*Text));
+}
+
+void URandomTextWidget::RandomTypoCompleted(UObject* TextObj , AActor* obj)
+{
+	UTextBlock *NewBlock = Cast<UTextBlock>(TextObj);
+	NewBlock->RemoveFromParent();
+	obj->Destroy();	
 }

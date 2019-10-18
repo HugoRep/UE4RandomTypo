@@ -3,39 +3,56 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "TimerManager.h"
+#include "RandomTypoEffect.generated.h"
 
-/**
- * 
- */
+DECLARE_DELEGATE_OneParam(FRandomTypoChanged, const FString&)
+DECLARE_DELEGATE(FRandomTypoCompleted)
+
+UCLASS()
 class RANDOMTYPO_API ARandomTypoEffect : public AActor
 {
-public:
+	GENERATED_BODY()
+	
+public:	
+	// Sets default values for this actor's properties
 	ARandomTypoEffect();
-	~ARandomTypoEffect();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 public:
-	void RandomTypeStart(UObject* textObj, FString text, float Speed = 0.03f);
+	void RandomTypeStart(FString text, float SpeedValue = 0.03f);
+
+	FRandomTypoChanged RandomTypoChaged;
+
+	FRandomTypoCompleted RandomTypoCompleted;
 
 private:
-	//Text Random Typo ~ 
+
 	FString GetRandom();
 
 	FString CharAt(FString str, int n, FString ChangeStr);
 
 	UFUNCTION()
 	void TimerEvent();
-	//void TimerEvent(UObject * TextObject, FString Text);
 
 	float randRange(int min, int max);
-
-private:
+private:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
 	FTimerHandle TimerHandler;
 
 	FTimerDelegate TimerDelegate;
 
+	
 	//랜덤 텍스트 카운트
 	int RandomTypoCount;
+
+	float Speed;
 
 	//텍스트 완성 카운트;
 	int CompleteTypoCount;
@@ -43,5 +60,8 @@ private:
 	//텍스트 전체 길이
 	int TextLength;
 
-	FString AppendRandomTypo = "";
+	FString RandomTypoStr;
+
+	FString AppendRandomTypo;
+
 };
