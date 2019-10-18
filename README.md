@@ -1,7 +1,6 @@
 # UE4RandomTypo
 
 
-![Alt text](https://drive.google.com/open?id=1s3YmuM-egW1WrHD7muXX2JQ5OWsJI89R)
 
 
 ProjectName.Build.cs
