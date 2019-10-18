@@ -33,7 +33,7 @@ RandomTypoCompleted
 
 
 
-
+ 
 EX)
 
 ARandomTypoEffect *objActor = GetWorld()->SpawnActor<ARandomTypoEffect>();
