@@ -17,9 +17,11 @@ PublicDependencyModuleNames.AddRange(new string[] {
   
   
  *Text : 변경될 텍스트
+ 
+ .
  *Speed : 랜덤 텍스트 모션 스피드
  
- 
+ .
 RandomTypeStart(FString Text, float Speed)
 
 
@@ -35,6 +37,8 @@ RandomTypoCompleted
 
 
 EX)
+
+.
 
 ARandomTypoEffect *objActor = GetWorld()->SpawnActor<ARandomTypoEffect>();
   
