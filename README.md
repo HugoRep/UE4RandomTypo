@@ -2,6 +2,7 @@
 
 
 
+##Setting 
 
 ProjectName.Build.cs
 
@@ -10,10 +11,7 @@ Add Random Typo
 
 
 PublicDependencyModuleNames.AddRange(new string[] { 
-
 "Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" 
-
-
 });
   
  
