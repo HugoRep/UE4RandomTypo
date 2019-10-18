@@ -3,15 +3,26 @@
 
 <img src="./Typo.png">
 
+<<<<<<< HEAD
 ######ProjectName.Build.cs
+=======
+##Setting 
+>>>>>>> d0944af35352ba2181bcba6b04c496cfeb780d66
 
 
 ## Add Random Typo
 
 
+<<<<<<< HEAD
 ####PublicDependencyModuleNames.AddRange(new string[] { 
 ####"Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" 
 ####});
+=======
+
+PublicDependencyModuleNames.AddRange(new string[] { 
+"Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" 
+});
+>>>>>>> d0944af35352ba2181bcba6b04c496cfeb780d66
   
  
   
@@ -30,8 +41,13 @@
 
 
 
+<<<<<<< HEAD
 
 ####EX)
+=======
+ 
+EX)
+>>>>>>> d0944af35352ba2181bcba6b04c496cfeb780d66
 
 ####ARandomTypoEffect *objActor = GetWorld()->SpawnActor<ARandomTypoEffect>();
 ####objActor->RandomTypeStart(*Text.ToString(), 0.05f);
