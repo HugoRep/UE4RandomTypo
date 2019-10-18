@@ -11,6 +11,7 @@ PublicDependencyModuleNames.AddRange(new string[] {
 
 "Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" 
 
+
 });
   
   
@@ -34,9 +35,17 @@ RandomTypoCompleted
 
 
 EX)
+
 ARandomTypoEffect *objActor = GetWorld()->SpawnActor<ARandomTypoEffect>();
+  
+  
 objActor->RandomTypeStart(*Text.ToString(), 0.05f);
   
+  
 AActor* actorObj = Cast<AActor>(objActor);  
+  
+  
 objActor->RandomTypoChaged.BindUObject(this, &URandomTextWidget::RandomTypoChanged , TextObj);
+  
+  
 objActor->RandomTypoCompleted.BindUObject(this, &URandomTextWidget::RandomTypoCompleted, TextObj , actorObj);
