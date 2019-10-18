@@ -1,24 +1,33 @@
 # UE4RandomTypo
 
 
-
 ProjectName.Build.cs
-Add "Random Typo"
-PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" });
+
+
+Add Random Typo
+
+
+PublicDependencyModuleNames.AddRange(new string[] { 
+
+"Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" 
+
+});
   
-/**
- *    Text : 변경될 텍스트
- *    Speed : 랜덤 텍스트 모션 스피드
- */
+  
+  
+ *Text : 변경될 텍스트
+ *Speed : 랜덤 텍스트 모션 스피드
+ 
+ 
 RandomTypeStart(FString Text, float Speed)
 
 
+타이포 변경 델리게이트
 
-
-  
-//타이포 변경 델리게이트
 RandomTypoChaged
-//타이포 변경 완료 델리게이트 
+
+타이포 변경 완료 델리게이트 
+
 RandomTypoCompleted
 
 
