@@ -1,7 +1,7 @@
 # UE4RandomTypo
 
 
-ProjectName.Build.cs
+#ProjectName.Build.cs
 
 
 Add Random Typo
