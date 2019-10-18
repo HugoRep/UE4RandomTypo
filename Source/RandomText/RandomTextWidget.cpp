@@ -95,6 +95,6 @@ void URandomTextWidget::RandomTypoChanged(const FString& Text , UObject* TextObj
 void URandomTextWidget::RandomTypoCompleted(UObject* TextObj , AActor* obj)
 {
 	UTextBlock *NewBlock = Cast<UTextBlock>(TextObj);
-	NewBlock->RemoveFromParent();
-	obj->Destroy();	
+	//NewBlock->RemoveFromParent();
+	//obj->Destroy();	
 }
