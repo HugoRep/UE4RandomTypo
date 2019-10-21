@@ -19,7 +19,7 @@ PublicDependencyModuleNames.AddRange(new string[] {
 
 
 ##### 타이포 변경 델리게이트
-###### RandomTypoChaged
+###### RandomTypoChanged
 
 ##### 타이포 변경 완료 델리게이트
 
