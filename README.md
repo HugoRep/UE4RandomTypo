@@ -1,6 +1,6 @@
-# UE4RandomTypo
+# UE4 RandomTypo
 
-<img src="./Typo.png">
+<img src="./Gif_Sample.gif">
 
 ### 
 ### Setting ProjectName.Build.cs
