@@ -5,9 +5,12 @@
 ### 
 ### Setting ProjectName.Build.cs
 ### 
-###### PublicDependencyModuleNames.AddRange(new string[] { 
-###### "Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" 
-###### });
+```
+PublicDependencyModuleNames.AddRange(new string[] { 
+"Core", "CoreUObject", "Engine", "InputCore", "RandomTypo" 
+});
+```
+
 ### 
 ### 
 ### RandomTypeStart(FString Text, float Speed)
