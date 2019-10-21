@@ -24,7 +24,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	void RandomTypeStart(FString text, float SpeedValue = 0.03f);
+	void RandomTypeStart(FString Text, float SpeedValue, FString StartStr);
 
 	FRandomTypoChanged RandomTypoChaged;
 
@@ -61,6 +61,8 @@ private:
 	int TextLength;
 
 	FString RandomTypoStr;
+
+	FString StartString;
 
 	FString AppendRandomTypo;
 

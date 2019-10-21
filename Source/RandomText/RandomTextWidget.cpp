@@ -76,7 +76,7 @@ void URandomTextWidget::AddMessage(const FText& Text)
 			ScrollBox->ScrollToEnd();
 	
 			ARandomTypoEffect *objActor = GetWorld()->SpawnActor<ARandomTypoEffect>();
-			objActor->RandomTypeStart(*Text.ToString(), 0.05f);
+			objActor->RandomTypeStart(*Text.ToString(), 0.05f , "X");
 
 			objActor->RandomTypoChaged.BindUObject(this, &URandomTextWidget::RandomTypoChanged , TextObj);
 
@@ -95,6 +95,6 @@ void URandomTextWidget::RandomTypoChanged(const FString& Text , UObject* TextObj
 void URandomTextWidget::RandomTypoCompleted(UObject* TextObj , AActor* obj)
 {
 	UTextBlock *NewBlock = Cast<UTextBlock>(TextObj);
-	NewBlock->RemoveFromParent();
-	obj->Destroy();	
+	//NewBlock->RemoveFromParent();
+	//obj->Destroy();	
 }

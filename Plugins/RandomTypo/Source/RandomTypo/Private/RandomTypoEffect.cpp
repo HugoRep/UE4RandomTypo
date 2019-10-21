@@ -31,13 +31,14 @@ void ARandomTypoEffect::Tick(float DeltaTime)
 }
 
 
-void ARandomTypoEffect::RandomTypeStart(FString Text, float SpeedValue)
+void ARandomTypoEffect::RandomTypeStart(FString Text, float SpeedValue , FString StartStr)
 {
 	UE_LOG(LogTemp, Warning, TEXT("---------------------------- Random Type Start ----------------------------"));
 
 	Speed = SpeedValue;
 	RandomTypoCount = 0;
 	CompleteTypoCount = 0;
+	StartString = StartStr;
 	RandomTypoStr = Text;
 	TextLength = Text.Len();
 	
@@ -87,7 +88,7 @@ void ARandomTypoEffect::TimerEvent()
 	}
 	else
 	{
-		AppendRandomTypo.Append(FString("X"));
+		AppendRandomTypo.Append(FString(StartString));
 		RandomTypoCount++;
 	}
 	
